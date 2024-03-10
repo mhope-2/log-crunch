@@ -45,11 +45,12 @@ func main() {
 
 		err := producer.SendMessage(context.Background(), []byte(key), []byte(value))
 		if err != nil {
-			logger.Fatalf("Error sending message to Kafka: %v", err)
+			logger.Errorf("Error sending message to Kafka: %v", err)
 		}
 
 		fmt.Println("Log message sent")
 
+		// induce 1 sec delay
 		time.Sleep(1 * time.Second)
 	}
 }
