@@ -4,6 +4,7 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/mhope-2/log-agent/shared"
 	"github.com/segmentio/kafka-go"
 	"os"
 )
@@ -21,15 +22,10 @@ type Producer struct {
 }
 
 func NewProducer() *Producer {
-	//env := shared.NewEnvEnvConfig()
+	env := shared.NewEnvEnvConfig()
 
 	w := &kafka.Writer{
-		//Addr:  kafka.TCP(env.KafkaBrokers...),
-		Addr: kafka.TCP([]string{
-			"localhost:9093",
-			"localhost:9094",
-			"localhost:9095",
-		}...),
+		Addr:  kafka.TCP(env.KafkaBrokers...),
 		Topic: TOPIC,
 	}
 	fmt.Println(w.Addr)

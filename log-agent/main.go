@@ -37,9 +37,8 @@ func main() {
 		key := "log"
 		message := logMessages[rand.Intn(len(logMessages))]
 		level := logLevels[rand.Intn(len(logLevels))]
-		timestamp := time.Now().Format(time.RFC3339)
 
-		value := fmt.Sprintf("%s %s %s", timestamp, level, message)
+		value := fmt.Sprintf("%s %s %s", time.Now().Format(time.RFC3339), level, message)
 
 		fmt.Println("Sending log message")
 

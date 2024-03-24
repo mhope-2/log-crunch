@@ -19,7 +19,7 @@ func NewConsumer() *Consumer {
 		Brokers:     env.KafkaBrokers,
 		Topic:       env.Topic,
 		GroupID:     env.GroupID,
-		StartOffset: kafka.FirstOffset,
+		StartOffset: kafka.FirstOffset, // from whence the consumer group should begin consuming
 	})
 
 	return &Consumer{
