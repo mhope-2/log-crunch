@@ -3,11 +3,12 @@ package kafka
 
 import (
 	"context"
-	"github.com/mhope-2/log-agent/shared"
+	"fmt"
 	"github.com/segmentio/kafka-go"
+	"os"
 )
 
-const TOPIC = "topic"
+var TOPIC = os.Getenv("TOPIC")
 
 // WriterInterface abstracts the capability to write Kafka messages.
 type WriterInterface interface {
@@ -20,12 +21,18 @@ type Producer struct {
 }
 
 func NewProducer() *Producer {
-	EnvConfig := shared.NewEnvEnvConfig()
+	//env := shared.NewEnvEnvConfig()
 
 	w := &kafka.Writer{
-		Addr:  kafka.TCP(EnvConfig.KafkaBrokers...),
+		//Addr:  kafka.TCP(env.KafkaBrokers...),
+		Addr: kafka.TCP([]string{
+			"localhost:9093",
+			"localhost:9094",
+			"localhost:9095",
+		}...),
 		Topic: TOPIC,
 	}
+	fmt.Println(w.Addr)
 	return &Producer{
 		writer: w,
 	}
