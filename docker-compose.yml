@@ -86,6 +86,19 @@ services:
     depends_on:
       - zookeeper
 
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=logCluster
+      - CASSANDRA_DC=logDataCenter
+      - CASSANDRA_RACK=logRack
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+    networks:
+      - kafka-net
+
   log-agent:
     build: ./log-agent
     container_name: log-agent
@@ -115,6 +128,7 @@ services:
       - kafka1
       - kafka2
       - kafka3
+      - cassandra
 
 networks:
   kafka-net:

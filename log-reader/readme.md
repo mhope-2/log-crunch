@@ -4,7 +4,6 @@ generated message to the Kafka brokers.
 
 ### Useful Kafka Shell Commands
 
-
 2. List Available Topics:
 ```bash
 kafka-topics.sh --list --bootstrap-server <bootstrap-server>
