@@ -1,8 +1,6 @@
 package cassandra
 
-import (
-	"github.com/monzo/gocassa"
-)
+import "github.com/monzo/gocassa"
 
 // getKeySpace creates a connection to the Cassandra DB instance
 func GetKeySpace() (gocassa.KeySpace, error) {
