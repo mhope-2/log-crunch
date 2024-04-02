@@ -9,7 +9,7 @@ import (
 	"log"
 )
 
-func CreateMessage(msg *types.Message) {
+func SaveMessage(msg *types.Message) {
 	keySpace, err := cassandra.GetKeySpace()
 
 	salesTable := keySpace.Table("message", &types.Message{}, gocassa.Keys{
@@ -18,7 +18,7 @@ func CreateMessage(msg *types.Message) {
 
 	err = salesTable.Set(types.Message{
 		ID:        uuid.New().String(),
-		Level:     msg.Level,
+		LogLevel:  msg.LogLevel,
 		Value:     msg.Value,
 		Timestamp: msg.Timestamp,
 	}).RunWithContext(context.TODO())

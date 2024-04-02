@@ -3,6 +3,8 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/mhope-2/log-reader/processing"
+	"github.com/mhope-2/log-reader/repository"
 	"github.com/mhope-2/log-reader/shared"
 	"github.com/segmentio/kafka-go"
 	"github.com/sirupsen/logrus"
@@ -37,9 +39,9 @@ func (c *Consumer) Consume(ctx context.Context) error {
 
 		fmt.Printf("message at offset %d: %s = %s\n\n", m.Offset, string(m.Key), string(m.Value))
 
-		// Here, process the message as needed.
-		// func process msg (unmarshall the msg value into a struct)
-		// database func create log (create and save to db)
+		message, err := processing.ProcessMessage(string(m.Value))
+
+		repository.SaveMessage(message)
 	}
 
 	// in case of a finite read

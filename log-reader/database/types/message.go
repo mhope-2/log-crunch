@@ -4,7 +4,7 @@ import "time"
 
 type Message struct {
 	ID        string
-	Level     string
+	LogLevel  string
 	Value     string
 	Timestamp time.Time
 }
