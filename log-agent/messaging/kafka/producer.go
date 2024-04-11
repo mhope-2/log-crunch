@@ -3,7 +3,6 @@ package kafka
 
 import (
 	"context"
-	"fmt"
 	"github.com/mhope-2/log-agent/shared"
 	"github.com/segmentio/kafka-go"
 	"os"
@@ -28,7 +27,6 @@ func NewProducer() *Producer {
 		Addr:  kafka.TCP(env.KafkaBrokers...),
 		Topic: TOPIC,
 	}
-	fmt.Println(w.Addr)
 	return &Producer{
 		writer: w,
 	}
