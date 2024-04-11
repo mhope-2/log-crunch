@@ -10,7 +10,7 @@ import (
 )
 
 func SaveMessage(msg *types.Message) {
-	keySpace, err := cassandra.GetKeySpace()
+	keySpace, err := cassandra.GetLogsKeypace()
 
 	salesTable := keySpace.Table("message", &types.Message{}, gocassa.Keys{
 		PartitionKeys: []string{"ID"},
