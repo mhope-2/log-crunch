@@ -1,10 +1,15 @@
 package cassandra
 
-import "github.com/monzo/gocassa"
+import (
+	"github.com/mhope-2/log-query/shared"
+	"github.com/monzo/gocassa"
+)
 
 // getKeySpace creates a connection to the Cassandra DB instance
-func GetKeySpace() (gocassa.KeySpace, error) {
-	keySpace, err := gocassa.ConnectToKeySpace("logs", []string{"127.0.0.1"}, "", "")
+func GetLogsKeySpace() (gocassa.KeySpace, error) {
+	env := shared.NewEnvEnvConfig()
+
+	keySpace, err := gocassa.ConnectToKeySpace("logs", []string{env.CassandraDBHost}, "", "")
 	if err != nil {
 		panic(err)
 	}

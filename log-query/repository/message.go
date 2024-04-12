@@ -10,7 +10,7 @@ import (
 
 func RetrieveMessage(id string) types.Message {
 	result := types.Message{}
-	keySpace, err := cassandra.GetKeySpace()
+	keySpace, err := cassandra.GetLogsKeySpace()
 	if err != nil {
 		panic(err)
 	}
