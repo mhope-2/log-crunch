@@ -41,7 +41,11 @@ func (c *Consumer) Consume(ctx context.Context) error {
 
 		message, err := processing.ProcessMessage(string(m.Value))
 
-		repository.SaveMessage(message)
+		err = repository.SaveMessage(message)
+		if err != nil {
+			logrus.Errorf("error while saving message: %v", err)
+			return err
+		}
 	}
 
 	// in case of a finite read

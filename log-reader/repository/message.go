@@ -9,14 +9,21 @@ import (
 	"log"
 )
 
-func SaveMessage(msg *types.Message) {
-	keySpace, err := cassandra.GetLogsKeypace()
+// SaveMessage inserts a message record into the messages table
+func SaveMessage(msg *types.Message) error {
+	keySpace, err := cassandra.GetLogsKeySpace()
 
-	salesTable := keySpace.Table("message", &types.Message{}, gocassa.Keys{
-		PartitionKeys: []string{"ID"},
+	messagesTable := keySpace.Table("messages", &types.Message{}, gocassa.Keys{
+		PartitionKeys: []string{"id"},
 	})
 
-	err = salesTable.Set(types.Message{
+	err = messagesTable.CreateIfNotExist()
+	if err != nil {
+		log.Fatalf("Failed to create messages table: %v", err)
+		return err
+	}
+
+	err = messagesTable.Set(types.Message{
 		ID:        uuid.New().String(),
 		LogLevel:  msg.LogLevel,
 		Value:     msg.Value,
@@ -24,5 +31,8 @@ func SaveMessage(msg *types.Message) {
 	}).RunWithContext(context.TODO())
 	if err != nil {
 		log.Printf("Error saving mesage to db; err: %v", err)
+		return err
 	}
+
+	return err
 }

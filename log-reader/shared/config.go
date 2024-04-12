@@ -6,9 +6,10 @@ import (
 )
 
 type EnvConfig struct {
-	KafkaBrokers []string
-	Topic        string
-	GroupID      string
+	KafkaBrokers    []string
+	Topic           string
+	GroupID         string
+	CassandraDBHost string
 }
 
 func NewEnvEnvConfig() *EnvConfig {
@@ -18,7 +19,8 @@ func NewEnvEnvConfig() *EnvConfig {
 			os.Getenv("KAFKA_BROKER2"),
 			os.Getenv("KAFKA_BROKER3"),
 		},
-		Topic:   os.Getenv("TOPIC"),
-		GroupID: os.Getenv("GROUP_ID"),
+		Topic:           os.Getenv("TOPIC"),
+		GroupID:         os.Getenv("GROUP_ID"),
+		CassandraDBHost: os.Getenv("CASSANDRA_DB_HOST"),
 	}
 }

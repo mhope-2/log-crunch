@@ -32,3 +32,23 @@ cqlsh
 ```bash
 CREATE KEYSPACE IF NOT EXISTS my_keyspace WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}  AND durable_writes = true;
 ```
+
+3. Switch to a Keyspace (my_keyspace)
+```bash
+use my_keyspace;
+```
+
+4. List All Tables in the Keyspace:
+```bash
+DESCRIBE TABLES;
+```
+
+5. Get detailed info on a table (my_table)
+```bash
+DESCRIBE TABLE my_table;
+```
+
+6. Retrieve data from a table (my_table)
+```bash
+select * from my_table;
+```
