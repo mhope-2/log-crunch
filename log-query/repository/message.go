@@ -8,12 +8,9 @@ import (
 	"log"
 )
 
-func RetrieveMessage(id string) types.Message {
+func (r *Repository) RetrieveMessage(id string) (types.Message, error) {
 	result := types.Message{}
-	keySpace, err := cassandra.GetLogsKeySpace()
-	if err != nil {
-		panic(err)
-	}
+	keySpace := cassandra.GetLogsKeySpace()
 
 	salesTable := keySpace.Table("message", &types.Message{}, gocassa.Keys{
 		PartitionKeys: []string{"ID"},
@@ -21,7 +18,8 @@ func RetrieveMessage(id string) types.Message {
 
 	if err := salesTable.Where(gocassa.Eq("ID", id)).ReadOne(&result).RunWithContext(context.TODO()); err != nil {
 		log.Printf("Error querying data: %v", err)
+		return types.Message{}, err
 	}
 
-	return result
+	return result, nil
 }

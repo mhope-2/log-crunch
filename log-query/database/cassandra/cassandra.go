@@ -6,7 +6,7 @@ import (
 )
 
 // getKeySpace creates a connection to the Cassandra DB instance
-func GetLogsKeySpace() (gocassa.KeySpace, error) {
+func GetLogsKeySpace() gocassa.KeySpace {
 	env := shared.NewEnvEnvConfig()
 
 	keySpace, err := gocassa.ConnectToKeySpace("logs", []string{env.CassandraDBHost}, "", "")
@@ -14,5 +14,5 @@ func GetLogsKeySpace() (gocassa.KeySpace, error) {
 		panic(err)
 	}
 
-	return keySpace, nil
+	return keySpace
 }
