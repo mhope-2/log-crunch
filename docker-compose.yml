@@ -130,6 +130,19 @@ services:
       - kafka3
       - cassandra
 
+  log-query:
+    build: ./log-query
+    container_name: log-query
+    env_file: ./log-query/.env
+    ports:
+      - "5003:5003"
+    volumes:
+      - .:/log-query
+    networks:
+      - kafka-net
+    depends_on:
+      - cassandra
+
 networks:
   kafka-net:
     driver: bridge

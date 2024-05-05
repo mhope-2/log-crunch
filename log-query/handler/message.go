@@ -32,8 +32,8 @@ func (h *Handler) RetrieveMessage(w http.ResponseWriter, r *http.Request) {
 	pathSegments := strings.Split(r.URL.Path, "/")
 
 	if len(pathSegments) > 2 && pathSegments[1] == "url" {
+		// Extract and use id from path
 		id := pathSegments[2]
-		// Now you can use the ID to perform whatever action is needed
 		message, err := h.Repo.RetrieveMessage(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("{\"error\":\"%s\"}", err.Error()), http.StatusInternalServerError)
@@ -49,7 +49,10 @@ func (h *Handler) RetrieveMessage(w http.ResponseWriter, r *http.Request) {
 
 		// Write the JSON response
 		w.WriteHeader(http.StatusOK)
-		w.Write(jsonResponse)
+		_, err = w.Write(jsonResponse)
+		if err != nil {
+			return
+		}
 
 	} else {
 		http.NotFound(w, r)

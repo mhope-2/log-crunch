@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/mhope-2/log-query/database/cassandra"
-	handler "github.com/mhope-2/log-query/handlers"
+	"github.com/mhope-2/log-query/handler"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -15,6 +16,7 @@ func main() {
 	//http.HandleFunc("/query/", h.QueryMessage)
 	http.HandleFunc("/message/", h.RetrieveMessage)
 
-	fmt.Println("Server is running on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
+	fmt.Printf("Server is running on port %s\n", port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
