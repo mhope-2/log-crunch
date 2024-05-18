@@ -52,3 +52,8 @@ DESCRIBE TABLE my_table;
 ```bash
 select * from my_table;
 ```
+
+7. Show/Descrive all Keyspaces (DBs)
+```bash
+DESCRIBE kayspaces;
+```
