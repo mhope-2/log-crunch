@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
+	"regexp"
 )
 
 //func (h *Handler) QueryMessage(w http.ResponseWriter, r *http.Request) {
@@ -29,11 +29,12 @@ import (
 func (h *Handler) RetrieveMessage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	pathSegments := strings.Split(r.URL.Path, "/")
+	re := regexp.MustCompile(`/messages/([a-f0-9\-]+)$`)
+	matches := re.FindStringSubmatch(r.URL.Path)
 
-	if len(pathSegments) > 2 && pathSegments[1] == "url" {
-		// Extract and use id from path
-		id := pathSegments[2]
+	if len(matches) == 2 {
+		id := matches[1]
+
 		message, err := h.Repo.RetrieveMessage(id)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("{\"error\":\"%s\"}", err.Error()), http.StatusInternalServerError)

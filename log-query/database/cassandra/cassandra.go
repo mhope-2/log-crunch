@@ -5,8 +5,8 @@ import (
 	"github.com/monzo/gocassa"
 )
 
-// getKeySpace creates a connection to the Cassandra DB instance
-func GetLogsKeySpace() gocassa.KeySpace {
+// GetLogsKeySpace creates a connection to the Cassandra DB instance
+func GetLogsKeySpace() (gocassa.KeySpace, error) {
 	env := shared.NewEnvEnvConfig()
 
 	keySpace, err := gocassa.ConnectToKeySpace("logs", []string{env.CassandraDBHost}, "", "")
@@ -14,5 +14,5 @@ func GetLogsKeySpace() gocassa.KeySpace {
 		panic(err)
 	}
 
-	return keySpace
+	return keySpace, nil
 }

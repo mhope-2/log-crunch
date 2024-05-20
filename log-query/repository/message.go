@@ -10,9 +10,13 @@ import (
 
 func (r *Repository) RetrieveMessage(id string) (types.Message, error) {
 	result := types.Message{}
-	keySpace := cassandra.GetLogsKeySpace()
+	keySpace, err := cassandra.GetLogsKeySpace()
+	if err != nil {
+		log.Fatalf("Failed to connect to logs KeySpace: %v", err)
+		return types.Message{}, err
+	}
 
-	salesTable := keySpace.Table("message", &types.Message{}, gocassa.Keys{
+	salesTable := keySpace.Table("messages", &types.Message{}, gocassa.Keys{
 		PartitionKeys: []string{"ID"},
 	})
 

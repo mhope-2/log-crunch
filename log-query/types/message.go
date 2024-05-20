@@ -3,8 +3,8 @@ package types
 import "time"
 
 type Message struct {
-	ID        string
-	Level     string
-	Value     string
-	Timestamp time.Time
+	ID        string    `cql:"id"`
+	LogLevel  string    `cql:"log_level"`
+	Value     string    `cql:"value"`
+	Timestamp time.Time `cql:"timestamp"`
 }

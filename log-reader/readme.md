@@ -53,7 +53,7 @@ DESCRIBE TABLE my_table;
 select * from my_table;
 ```
 
-7. Show/Descrive all Keyspaces (DBs)
+7. Show/Describe all Keyspaces (DBs)
 ```bash
-DESCRIBE kayspaces;
+DESCRIBE keyspaces;
 ```

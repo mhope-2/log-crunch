@@ -11,10 +11,15 @@ import (
 
 func main() {
 
-	h := handler.New(cassandra.GetLogsKeySpace())
+	keySpace, err := cassandra.GetLogsKeySpace()
+	if err != nil {
+		log.Fatalf("Error connecting to logs Keyspace: %v", err)
+	}
+
+	h := handler.New(keySpace)
 
 	//http.HandleFunc("/query/", h.QueryMessage)
-	http.HandleFunc("/message/", h.RetrieveMessage)
+	http.HandleFunc("/messages/", h.RetrieveMessage)
 
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
 	fmt.Printf("Server is running on port %s\n", port)
