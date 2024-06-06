@@ -31,8 +31,8 @@ services:
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9093
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     volumes:
-      - /var/lib/kafka/data:/var/lib/kafka/data
-      - /var/log/kafka:/var/log/kafka
+      - kafka-data:/var/lib/kafka/data
+      - kafka-logs:/var/log/kafka
     networks:
       - kafka-net
     depends_on:
@@ -55,8 +55,8 @@ services:
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     volumes:
-      - /var/lib/kafka/data:/var/lib/kafka/data
-      - /var/log/kafka:/var/log/kafka
+      - kafka-data:/var/lib/kafka/data
+      - kafka-logs:/var/log/kafka
     networks:
       - kafka-net
     depends_on:
@@ -79,8 +79,8 @@ services:
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9095
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     volumes:
-      - /var/lib/kafka/data:/var/lib/kafka/data
-      - /var/log/kafka:/var/log/kafka
+      - kafka-data:/var/lib/kafka/data
+      - kafka-logs:/var/log/kafka
     networks:
       - kafka-net
     depends_on:
