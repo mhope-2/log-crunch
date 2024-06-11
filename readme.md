@@ -1,6 +1,6 @@
 # Log Crunch
 
-Log Crunch is a project comprising three different go services; a log agent, a log reader/processor and a log query service.  
+Log Crunch is a project comprising three different go services; a log agent, a log reader/processor and a log query service.
 The `log-agent` service generates random log messages via a Kafka Producer, the `log-reader` service then consumes the log messages
 using a Kafka Consumer and proceeds to write it to a Cassandra DB.
 The log-query service provides an API interface to query the log data.
@@ -54,8 +54,8 @@ sample response:
 }
 ```
 
-### NOTE
+### Note
 - Read the readme files in each of the service dirs to find out how to interact with the services in a Docker env. 
 
-### TODO
+### Todo
 [x] Ensure reliability and resilience of kafka brokers
