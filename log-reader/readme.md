@@ -1,4 +1,4 @@
-# Log Agent
+# Log Reader
 Log Agent is just what it's name says; a log agent. It simulates the generation of log messages and then writes the
 generated message to the Kafka brokers.
 
